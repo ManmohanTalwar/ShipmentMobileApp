@@ -6,6 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moniepoint_task/helper/app_constants.dart';
 import 'package:moniepoint_task/helper/ui_helpers.dart';
 import 'package:moniepoint_task/main.dart';
+import 'package:moniepoint_task/presentation/screens/nav_pages/home/animated_list.dart';
+import 'package:moniepoint_task/presentation/screens/nav_pages/home/home.dart';
+import 'package:moniepoint_task/presentation/screens/nav_pages/home/neww.dart';
+import 'package:moniepoint_task/presentation/screens/search/search_page.dart';
 import 'package:moniepoint_task/presentation/widgets/custom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -170,57 +174,40 @@ class _HomePageState extends State<HomePage>
                     const SizedBox(
                       height: 14.0,
                     ),
-                    Hero(
-                      tag: 'Search-Container',
-                      child: Container(
-                        padding: const EdgeInsets.all(4.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(24.0),
-                        ),
-                        height: 48.0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                const SizedBox(
-                                  width: 6.0,
-                                ),
-                                Icon(
-                                  Icons.search,
-                                  color: context.primaryColor(),
-                                  size: 20.0,
-                                ),
-                                const SizedBox(
-                                  width: 6.0,
-                                ),
-                                Text(
-                                  'Enter the receipt number ...',
-                                  style: context.customStyle(
-                                    color: Colors.grey,
-                                    size: 14.0,
-                                    fontWeight: FontWeight.w400,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const SearchPage(),
+                          ),
+                        );
+                      },
+                      child: Hero(
+                        tag: 'Search-Container',
+                        flightShuttleBuilder:
+                            (c, ani, direction, fromContext, toContext) {
+                          switch (direction) {
+                            case HeroFlightDirection.push:
+                              return ScaleTransition(
+                                scale: ani.drive(
+                                  Tween(
+                                    begin: 0.5,
+                                    end: 1.0,
+                                  ).chain(
+                                    CurveTween(curve: Curves.fastOutSlowIn),
                                   ),
                                 ),
-                              ],
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(12.0),
-                              decoration: BoxDecoration(
-                                color: context.accentColor(),
-                                shape: BoxShape.circle,
-                              ),
-                              alignment: Alignment.center,
-                              child: const Icon(
-                                Icons.qr_code_scanner_rounded,
-                                size: 18.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
+                                child: fromContext.widget,
+                              );
+                            case HeroFlightDirection.pop:
+                              return toContext.widget;
+                          }
+                        },
+                        child: const SearchContainer(),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 8.0,
                     ),
                   ],
                 ),

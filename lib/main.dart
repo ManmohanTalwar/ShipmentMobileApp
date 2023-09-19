@@ -45,6 +45,7 @@ extension ContextExtentions on BuildContext {
   Color white() => AppConstants.white;
   Color black() => AppConstants.black;
   Color primaryColor() => AppConstants.primaryColor;
+  Color dividerColor() => const Color(0xfff3f3f3);
   Color accentColor() => AppConstants.accentColor;
   TextStyle customStyle({
     FontWeight? fontWeight,

@@ -38,6 +38,9 @@ class EntryField extends StatefulWidget {
   final EdgeInsets? contentPadding;
   final Color textColor;
   final Color borderColor;
+  final double radius;
+  final Widget? prefixWidget;
+  final Widget? suffixWidget;
 
   const EntryField({
     Key? key,
@@ -73,6 +76,9 @@ class EntryField extends StatefulWidget {
     this.minLines = 1,
     this.borderColor = const Color(0xffE0E2E1),
     this.suffixIconData,
+    this.radius = 8.0,
+    this.prefixWidget,
+    this.suffixWidget,
   });
 
   @override
@@ -81,17 +87,22 @@ class EntryField extends StatefulWidget {
 
 class _EntryFieldState extends State<EntryField> {
   Color get suffixIconColor => widget.suffixIconColor ?? AppConstants.black;
+  double get radius => widget.radius;
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Container(
-        color: Colors.white,
         height: 50.0,
         alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(radius),
+          color: Colors.white,
+        ),
         child: TextFormField(
           style: context.customStyle(
             size: 14.0,
             fontWeight: FontWeight.normal,
+            color: widget.textColor,
           ),
           focusNode: widget.focusNode,
           textCapitalization:
@@ -112,8 +123,9 @@ class _EntryFieldState extends State<EntryField> {
           maxLines: widget.maxLines ?? 1,
           obscureText: widget.obscureText,
           enableInteractiveSelection: false,
+          cursorWidth: 1.2,
           decoration: InputDecoration(
-            prefixText: widget.showCountryCode ? '+91 ' : '',
+            prefixText: widget.showCountryCode ? '+91 ' : null,
             errorText: widget.validator
                 ? widget.errorText != null && widget.errorText!.isNotEmpty
                     ? widget.errorText
@@ -134,40 +146,41 @@ class _EntryFieldState extends State<EntryField> {
                 color: widget.borderColor,
                 width: 1.0,
               ),
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(radius),
             ),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: widget.borderColor, width: 1.0),
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(radius),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: Colors.red,
               ),
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(radius),
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: widget.borderColor,
                 width: 1.0,
               ),
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(radius),
             ),
             errorBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: Colors.red,
               ),
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(radius),
             ),
             disabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: widget.borderColor,
                 width: 1.0,
               ),
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(radius),
             ),
-            suffixIcon:
-                widget.suffixIcon != null || widget.suffixIconData != null
+            prefixIcon: widget.prefixWidget,
+            suffixIcon: widget.suffixWidget ??
+                (widget.suffixIcon != null || widget.suffixIconData != null
                     ? IconButton(
                         icon: widget.suffixIconData ??
                             SvgPicture.asset(
@@ -178,7 +191,7 @@ class _EntryFieldState extends State<EntryField> {
                             ),
                         onPressed: widget.onSuffixPressed,
                       )
-                    : null,
+                    : null),
             hintText: widget.hint,
             prefixStyle: TextStyle(
               color: widget.textColor,
