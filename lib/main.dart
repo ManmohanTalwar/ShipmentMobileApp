@@ -46,8 +46,22 @@ extension ContextExtentions on BuildContext {
   Color black() => AppConstants.black;
   Color primaryColor() => AppConstants.primaryColor;
   Color dividerColor() => const Color(0xfff3f3f3);
+  Color greyTextColor() => const Color(0xffD5D4D5);
+  Color tealColor() => const Color(0xffD6F1E2);
   Color accentColor() => AppConstants.accentColor;
+  Color greenColor() => const Color(0xff49C830);
   TextStyle customStyle({
+    FontWeight? fontWeight,
+    Color? color,
+    double? size,
+    TextDecoration? decoration,
+  }) =>
+      AppConstants.customNormal(
+        color: color,
+        size: size,
+        weight: fontWeight,
+      );
+  TextStyle customFont({
     FontWeight? fontWeight,
     Color? color,
     double? size,

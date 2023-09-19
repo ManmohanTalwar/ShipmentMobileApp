@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const Size designRatio = Size(1080, 2400);
 
@@ -80,48 +81,6 @@ class AppConstants {
   static const String fontName = 'Whitney';
   static const Color darkGreen = Color(0xff082017);
 
-  static TextStyle appBarText(double size) => TextStyle(
-        color: white,
-        fontWeight: FontWeight.bold,
-        fontSize: size,
-      );
-
-  static TextStyle gridText(double size) => TextStyle(
-        color: white,
-        fontWeight: FontWeight.w500,
-        fontSize: size,
-      );
-
-  static TextStyle headlineLight(double size) => TextStyle(
-        // h5 -> headline
-        fontWeight: FontWeight.bold,
-        fontSize: size,
-//        letterSpacing: 0.27,
-        color: darkerText,
-      );
-
-  static TextStyle headlineDark(double size) => TextStyle(
-        // h5 -> headline
-        fontWeight: FontWeight.bold,
-        fontSize: size,
-        color: white,
-      );
-
-  static TextStyle subtitleLight(double size) => TextStyle(
-        // subtitle2 -> subtitle
-        fontWeight: FontWeight.w400,
-        fontSize: 14,
-        letterSpacing: -0.04,
-        color: black.withOpacity(0.5),
-      );
-  static TextStyle subtitleDark(double size) => TextStyle(
-        // subtitle2 -> subtitle
-        fontWeight: FontWeight.w400,
-        fontSize: 14,
-//        letterSpacing: -0.04,
-        color: white.withOpacity(0.7),
-      );
-
   static TextStyle customNormal({
     double? size,
     Color? color,
@@ -129,9 +88,7 @@ class AppConstants {
     FontStyle? style,
     double? letterSpacing,
   }) =>
-      TextStyle(
-        // fontFamily: 'Freight Neo',
-        fontFamily: 'FreightDisp Pro',
+      GoogleFonts.lato(
         fontWeight: weight ?? FontWeight.w600,
         fontSize: size,
         letterSpacing: letterSpacing,
@@ -139,77 +96,18 @@ class AppConstants {
         fontStyle: style,
       );
 
-  static TextStyle splash(
-          {double? size,
-          String? family,
-          Color? color,
-          FontWeight? weight,
-          FontStyle? style,
-          double? height,
-          double? letterSpacing,
-          TextDecoration? decoration,
-          double? decorationThickness,
-          Color? decorationColor}) =>
-      TextStyle(
-        fontFamily: family ?? 'FreightDisp Pro',
-        fontWeight: weight ?? FontWeight.w600,
-        fontSize: size,
-        letterSpacing: letterSpacing,
-        color: color,
-        fontStyle: style,
-        decoration: decoration,
-        decorationThickness: decorationThickness,
-        decorationColor: decorationColor,
-        decorationStyle: TextDecorationStyle.solid,
-        height: height,
-      );
-
-  static TextStyle custom({
+  static TextStyle customFont({
     double? size,
     Color? color,
     FontWeight? weight,
-    double? letterSpacing,
     FontStyle? style,
+    double? letterSpacing,
   }) =>
-      TextStyle(
-        // fontFamily: 'Freight Disp',
-        fontFamily: 'FreightDisp Pro',
-        fontWeight: weight ?? FontWeight.w500,
+      GoogleFonts.metrophobic(
+        fontWeight: weight ?? FontWeight.w600,
         fontSize: size,
         letterSpacing: letterSpacing,
         color: color,
         fontStyle: style,
       );
-
-  static const Map<String, dynamic> amenities = {
-    'POOL': 'assets/amenties/swimming_pool.svg',
-    'LOUNGE': 'assets/amenties/loungue.svg',
-    'WIFI': 'assets/amenties/wifi.svg',
-    'GYM': 'assets/amenties/gym.svg',
-    'TV_ROOM': 'assets/amenties/television.svg',
-    'PARKING': 'assets/amenties/parking.svg',
-    'PROFESSIONALLY_DECORATED': 'assets/amenties/professionally_decorated.svg',
-    'WELL_EQUIPPED_KITCHEN': 'assets/amenties/well_equipped_kitchen.svg',
-    'PRIVATE_SWIMMING_POOL': 'assets/amenties/swimming_pool.svg',
-    'OWNERS_STORAGE_FACILITY': 'assets/amenties/owner_storage_facility.svg',
-    'HOUSE_HELP_AND_SECURITY': 'assets/amenties/house_help_and_security.svg',
-    'ITALIAN_COFFEE_MACHINE': 'assets/amenties/coffe_mechine.svg',
-    'FULLY_FURNISHED': 'assets/amenties/fully_furnished.svg',
-    'KID_FRIENDLY': 'assets/amenties/kids freindly.svg',
-    'CHEF_ON_CALL': 'assets/amenties/chef_on_call.svg',
-    'OPEN_DECK': 'assets/amenties/open_deck.svg',
-    'BALCONY_WITH_BAR': 'assets/amenties/balcony_with_bar.svg',
-    'LARGE_GARDEN': 'assets/amenties/loungue.svg',
-    'MOUNTAIN_VIEWS': 'assets/amenties/mountain_view.svg',
-    'MOUNTAIN_VIEW': 'assets/amenties/mountain_view.svg',
-    'WELL_EQUIPPED_WET_AND_DRY_KITCHEN':
-        'assets/amenties/well_equipped_kitchen.svg',
-    'HOUSE_HELP': 'assets/amenties/house_help_and_security.svg',
-    'OUTDOOR_HOT_TUB': 'assets/amenties/hot_bathtub.svg',
-    'HIKING_TRAIL_ACCESS': 'assets/amenties/hiking_trail_access.svg',
-    'BATHS_COUNT': 'assets/amenties/bath.svg',
-    'BEDS_COUNT': 'assets/amenties/bed.svg',
-    'AREA_SQFT': 'assets/amenties/area.svg',
-    'EXTRA5': 'assets/amenties/Default_picture.svg',
-  };
 }

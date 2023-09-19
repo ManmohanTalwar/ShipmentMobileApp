@@ -84,10 +84,11 @@ class _SearchPageState extends State<SearchPage> {
                     borderRadius: BorderRadius.circular(16.0),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.blueGrey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 20.0,
-                          offset: const Offset(-4, 0)),
+                        color: Colors.blueGrey.withOpacity(0.1),
+                        spreadRadius: 5,
+                        blurRadius: 20.0,
+                        offset: const Offset(-4, 0),
+                      ),
                     ],
                   ),
                   child: SingleChildScrollView(
