@@ -33,6 +33,7 @@ dependencies:
   injectable: ^2.3.0
   lottie:
   flutter_animate:
+  persistent_bottom_nav_bar_v2: ^4.2.8
 
 dev_dependencies:
   flutter_test:
