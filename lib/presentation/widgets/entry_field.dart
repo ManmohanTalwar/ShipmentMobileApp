@@ -36,11 +36,14 @@ class EntryField extends StatefulWidget {
   final bool validator;
   final String? errorText;
   final EdgeInsets? contentPadding;
+  final Color hintColor;
   final Color textColor;
   final Color borderColor;
   final double radius;
   final Widget? prefixWidget;
   final Widget? suffixWidget;
+  final Color? bgColor;
+  final FontWeight? hintWeight;
 
   const EntryField({
     Key? key,
@@ -69,6 +72,7 @@ class EntryField extends StatefulWidget {
     this.suffixIconColor,
     this.validator = false,
     this.barColor = Colors.black,
+    this.hintColor = Colors.black,
     this.textColor = Colors.black,
     this.errorText,
     this.counterText,
@@ -79,6 +83,8 @@ class EntryField extends StatefulWidget {
     this.radius = 8.0,
     this.prefixWidget,
     this.suffixWidget,
+    this.bgColor,
+    this.hintWeight,
   });
 
   @override
@@ -96,7 +102,7 @@ class _EntryFieldState extends State<EntryField> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius),
-          color: Colors.white,
+          color: widget.bgColor ?? Colors.white,
         ),
         child: TextFormField(
           style: context.customStyle(
@@ -138,7 +144,7 @@ class _EntryFieldState extends State<EntryField> {
               style: FontStyle.normal,
               weight: FontWeight.w500,
               size: 15.0,
-              color: widget.textColor.withOpacity(0.6),
+              color: widget.hintColor.withOpacity(0.6),
             ),
             alignLabelWithHint: true,
             focusedBorder: OutlineInputBorder(
@@ -194,16 +200,16 @@ class _EntryFieldState extends State<EntryField> {
                     : null),
             hintText: widget.hint,
             prefixStyle: TextStyle(
-              color: widget.textColor,
+              color: widget.hintColor,
               fontSize: 13.0,
               fontWeight: FontWeight.w400,
             ),
             hintStyle: AppConstants.customNormal(
               color: widget.giveColorOpacity
-                  ? widget.textColor.withOpacity(0.8)
-                  : widget.textColor,
+                  ? widget.hintColor.withOpacity(0.8)
+                  : widget.hintColor,
               size: 13.0,
-              weight: FontWeight.w400,
+              weight: widget.hintWeight ?? FontWeight.w400,
             ),
           ),
         ),

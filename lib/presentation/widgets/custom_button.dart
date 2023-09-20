@@ -1,3 +1,4 @@
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:moniepoint_task/helper/Helper.dart';
 import 'package:moniepoint_task/helper/app_constants.dart';
 import 'package:moniepoint_task/main.dart';
@@ -18,6 +19,7 @@ class CustomButton extends StatefulWidget {
     this.showLoading = false,
     this.showMargin = true,
     this.borderColor = AppConstants.black,
+    this.controller,
   }) : super(key: key);
 
   final Color bg;
@@ -32,6 +34,7 @@ class CustomButton extends StatefulWidget {
   final double height;
   final TextStyle? style;
   final GestureTapCallback? onTap;
+  final AnimationController? controller;
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -123,6 +126,12 @@ class _CustomButtonState extends State<CustomButton> {
           ),
         ),
       ),
-    );
+    )
+        .animate(
+          controller: widget.controller,
+        )
+        .fadeIn(
+          duration: 350.ms,
+        );
   }
 }

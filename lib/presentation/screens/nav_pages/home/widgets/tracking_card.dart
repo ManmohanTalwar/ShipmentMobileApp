@@ -178,10 +178,10 @@ class TrackingCard extends StatelessWidget {
           ),
         ],
       ),
-    )
-        .animate(controller: controller)
-        .fadeIn(duration: 250.ms)
-        .then()
-        .slideY(begin: 1, end: 0, duration: 350.ms);
+    ).animate(controller: controller).fadeIn(duration: 250.ms).then().slideY(
+          begin: 0.25,
+          end: 0,
+          duration: 350.ms,
+        );
   }
 }

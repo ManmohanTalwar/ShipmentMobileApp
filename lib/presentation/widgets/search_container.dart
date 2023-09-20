@@ -38,7 +38,7 @@ class SearchContainer extends StatelessWidget {
                         size: 20.0,
                       ),
                       radius: 24.0,
-                      textColor: Colors.grey,
+                      hintColor: Colors.grey,
                       onSubmitted: (val) {
                         if (onSearched != null) {
                           onSearched!(val);

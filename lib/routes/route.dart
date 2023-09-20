@@ -2,6 +2,7 @@ import 'package:moniepoint_task/app_init.dart';
 import 'package:moniepoint_task/moniepoint.dart';
 import 'package:moniepoint_task/presentation/screens/auth/onboarding_screen.dart';
 import 'package:moniepoint_task/presentation/screens/home_page.dart';
+import 'package:moniepoint_task/presentation/screens/nav_pages/calculate/estimate_screen.dart';
 import 'package:moniepoint_task/presentation/screens/search/search_page.dart';
 
 import 'package:moniepoint_task/routes/route_list.dart';
@@ -27,6 +28,7 @@ class Routes {
         ),
     RouteList.onBoardingScreen: (context) => const OnBoardingScreen(),
     RouteList.search: (context) => const SearchPage(),
+    RouteList.estimateScreen: (context) => const EstimateScreen(),
   };
 
   static Route _routeGenerate(RouteSettings settings) {

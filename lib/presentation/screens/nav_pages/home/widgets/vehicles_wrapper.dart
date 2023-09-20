@@ -136,6 +136,10 @@ class _AvailableVehiclesState extends State<AvailableVehicles> {
         .animate(controller: widget.controller)
         .fadeIn(duration: 250.ms)
         .then()
-        .slideX(begin: 1, end: 0, duration: 350.ms);
+        .slideX(
+          begin: 0.3,
+          end: 0,
+          duration: 350.ms,
+        );
   }
 }

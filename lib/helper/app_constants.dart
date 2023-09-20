@@ -18,6 +18,8 @@ const Color onSecondaryColor = whiteColor;
 const Color succesColor = Color(0xff0DC600);
 const Color errorColor = Color(0xffFF2323);
 const Color offerBgColor = Color(0xffEF4129);
+const Color selectedCategoryColor = Color(0xff13202d);
+const Color textGreenColor = Color(0xff45bf89);
 
 final Color? greyColor = Colors.grey[200];
 final Color? darkGreyColor = Colors.grey[600];
@@ -46,6 +48,7 @@ class AppConstants {
     });
   }
 
+  static const Color scaffoldBgColor = Color(0xFFf9f9f9);
   static const Color primaryColor = Color(0xFF483285);
   static const Color primaryColor2 = Color(0xFF233E8B);
   static const Color accentColor = Color(0xFFF68427);

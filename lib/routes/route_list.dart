@@ -4,4 +4,5 @@ class RouteList {
   static const String splash = '/splash';
   static const String onBoardingScreen = '/onBoardingScreen';
   static const String search = '/search';
+  static const String estimateScreen = '/estimateScreen';
 }

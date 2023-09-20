@@ -3,6 +3,7 @@ import 'package:moniepoint_task/helper/ui_helpers.dart';
 import 'package:moniepoint_task/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:moniepoint_task/presentation/widgets/prefix_icon_widget.dart';
 
 class NormalDropDown extends StatelessWidget {
   final String text;
@@ -27,46 +28,80 @@ class NormalDropDown extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: isFromListing
-          ? Container(
-              // padding: const EdgeInsets.symmetric(
-              //   horizontal: 8.0,
-              //   vertical: 4.0,
-              // ),
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: borderColor),
-                ),
+          ? AnimatedContainer(
+              duration: const Duration(milliseconds: 350),
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                // borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(18.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blueGrey.withOpacity(0.1),
+                    spreadRadius: 5,
+                    blurRadius: 20.0,
+                    offset: const Offset(-4, 0),
+                  ),
+                ],
               ),
               alignment: Alignment.center,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: isCenter ? MainAxisSize.min : MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    text,
-                    style: context.customStyle(
-                      fontWeight: FontWeight.normal,
-                      color: context.primaryColor(),
-                      size: 12.0,
-                    ),
+                  Row(
+                    children: [
+                      const PrefixIconWidget(
+                        isImage: true,
+                      ),
+                      const SizedBox(
+                        width: 4.0,
+                      ),
+                      Container(
+                        width: 1.5,
+                        height: 24.0,
+                        decoration: BoxDecoration(
+                          color: context.greyTextColor().withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(2.0),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 12.0,
+                      ),
+                      Text(
+                        text,
+                        style: context.customStyle(
+                          fontWeight: FontWeight.bold,
+                          color: context.black(),
+                          size: 15.0,
+                        ),
+                      ),
+                    ],
                   ),
                   Icon(
                     Icons.keyboard_arrow_down_outlined,
-                    color: context.primaryColor(),
+                    color: context.darkTextColor(),
                     size: 20.0,
                   ),
                 ],
               ),
             )
-          : Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 8.0,
-              ),
+          : AnimatedContainer(
+              duration: const Duration(milliseconds: 350),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: context.black().withOpacity(0.4),
-                ),
+                color: Colors.white,
+                // borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(18.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blueGrey.withOpacity(0.1),
+                    spreadRadius: 5,
+                    blurRadius: 20.0,
+                    offset: const Offset(-4, 0),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

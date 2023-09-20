@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moniepoint_task/main.dart';
-import 'package:moniepoint_task/presentation/screens/search/search_page.dart';
 import 'package:moniepoint_task/presentation/widgets/search_container.dart';
 import 'package:moniepoint_task/routes/route_list.dart';
 import 'package:moniepoint_task/services/navigation_service.dart';

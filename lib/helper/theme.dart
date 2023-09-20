@@ -13,7 +13,7 @@ ThemeData appTheme = ThemeData(
   fontFamily: 'Freight Neo',
   splashColor: AppConstants.primaryColor.withOpacity(0.2),
   highlightColor: AppConstants.primaryColor.withOpacity(0.2),
-  scaffoldBackgroundColor: AppConstants.white,
+  scaffoldBackgroundColor: AppConstants.scaffoldBgColor,
   canvasColor: AppConstants.white,
   unselectedWidgetColor: AppConstants.blueSky,
   buttonTheme: ButtonThemeData(
