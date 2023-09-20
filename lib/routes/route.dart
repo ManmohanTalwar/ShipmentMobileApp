@@ -82,7 +82,7 @@ class _FadedTransitionRoute extends PageRouteBuilder {
               Animation<double> secondaryAnimation) {
             return widget!;
           },
-          transitionDuration: const Duration(milliseconds: 100),
+          transitionDuration: const Duration(milliseconds: 50),
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,
               Animation<double> secondaryAnimation,
@@ -90,7 +90,7 @@ class _FadedTransitionRoute extends PageRouteBuilder {
             return FadeTransition(
               opacity: CurvedAnimation(
                 parent: animation,
-                curve: Curves.easeOut,
+                curve: Curves.easeIn,
               ),
               child: child,
             );

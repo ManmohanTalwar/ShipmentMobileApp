@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:moniepoint_task/helper/Helper.dart';
-import 'package:moniepoint_task/helper/ui_helpers.dart';
-import 'package:moniepoint_task/main.dart';
-import 'package:moniepoint_task/presentation/widgets/entry_field.dart';
+import 'package:moniepoint_task/presentation/screens/search/widgets/search_widget.dart';
+import 'package:moniepoint_task/presentation/widgets/search_container.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -60,9 +56,11 @@ class _SearchPageState extends State<SearchPage> {
               child: SearchContainer(
                 isSearch: true,
                 onSearched: (val) {
-                  setState(() {
-                    showList = false;
-                  });
+                  setState(
+                    () {
+                      showList = false;
+                    },
+                  );
                   Future.delayed(const Duration(milliseconds: 100), () {
                     setState(() {
                       showList = true;
@@ -110,207 +108,6 @@ class _SearchPageState extends State<SearchPage> {
                     begin: 0.3,
                     end: 0,
                   ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SearchWidget extends StatelessWidget {
-  final Map data;
-  const SearchWidget({Key? key, required this.data}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12.0,
-        vertical: 10.0,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: context.primaryColor(),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.card_giftcard_outlined,
-                  color: Colors.white,
-                  size: 18.0,
-                ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    data['shipment_name'],
-                    style: context.customStyle(
-                      color: Colors.black,
-                      size: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 2.0,
-                  ),
-                  Text(
-                    '${data['shipment_id']} · ${data['from']} -> ${data['to']}',
-                    style: context.customStyle(
-                      color: Colors.grey,
-                      size: 14.0,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 8.0,
-          ),
-          Helper.divider(
-            right: 0.0,
-            left: 0.0,
-            color: context.dividerColor(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SearchContainer extends StatelessWidget {
-  final bool isSearch;
-  final Function(String)? onSearched;
-  const SearchContainer({Key? key, this.isSearch = false, this.onSearched})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 400),
-        color: context.primaryColor(),
-        padding: isSearch ? const EdgeInsets.symmetric(vertical: 12.0) : null,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (isSearch) ...{
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Expanded(
-                    child: EntryField(
-                      hint: 'Enter the receipt number ...',
-                      prefixWidget: Icon(
-                        Icons.search,
-                        color: context.primaryColor(),
-                        size: 20.0,
-                      ),
-                      radius: 24.0,
-                      textColor: Colors.grey,
-                      onSubmitted: (val) {
-                        if (onSearched != null) {
-                          onSearched!(val);
-                        }
-                      },
-                      suffixWidget: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        width: 30.0,
-                        margin: const EdgeInsets.only(
-                          right: 4.0,
-                          top: 4.0,
-                          bottom: 4.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: context.accentColor(),
-                          shape: BoxShape.circle,
-                        ),
-                        alignment: Alignment.center,
-                        child: const Icon(
-                          Icons.qr_code_scanner_rounded,
-                          size: 18.0,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 12.0,
-                  ),
-                ],
-              )
-            } else
-              Container(
-                padding: const EdgeInsets.all(4.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(24.0),
-                ),
-                height: 48.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const SizedBox(
-                          width: 6.0,
-                        ),
-                        Icon(
-                          Icons.search,
-                          color: context.primaryColor(),
-                          size: 20.0,
-                        ),
-                        const SizedBox(
-                          width: 6.0,
-                        ),
-                        Text(
-                          'Enter the receipt number ...',
-                          style: context.customStyle(
-                            color: Colors.grey,
-                            size: 14.0,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: context.accentColor(),
-                        shape: BoxShape.circle,
-                      ),
-                      alignment: Alignment.center,
-                      child: const Icon(
-                        Icons.qr_code_scanner_rounded,
-                        size: 18.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            const SizedBox(
-              height: 8.0,
-            ),
           ],
         ),
       ),
