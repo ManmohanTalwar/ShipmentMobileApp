@@ -10,7 +10,6 @@ ThemeData appTheme = ThemeData(
   useMaterial3: true,
   indicatorColor: AppConstants.primaryColor,
 // Define the default font family.
-  fontFamily: 'Freight Neo',
   splashColor: AppConstants.primaryColor.withOpacity(0.2),
   highlightColor: AppConstants.primaryColor.withOpacity(0.2),
   scaffoldBackgroundColor: AppConstants.scaffoldBgColor,

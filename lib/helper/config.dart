@@ -1,6 +1,3 @@
-import 'package:moniepoint_task/helper/app_prefs.dart';
-import 'package:moniepoint_task/injection.dart';
-
 class ApiConfig {
   static const String baseUrl =
       'https://www.moniepoint_tasklives.com/admin/api/';

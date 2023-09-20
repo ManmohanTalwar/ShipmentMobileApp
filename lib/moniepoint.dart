@@ -43,7 +43,7 @@ class MoniePointState extends State<MoniePoint> with WidgetsBindingObserver {
         child: Sizer(builder: (context, orientation, deviceType) {
           return MaterialApp(
             navigatorKey: locator<NavigationService>().navigatorKey,
-            title: 'MoniePoint',
+            title: 'Shipment Ready',
             debugShowCheckedModeBanner: false,
             navigatorObservers: [
               MyRouteObserver(),
