@@ -42,6 +42,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    appBarController.dispose();
+    trackingController.dispose();
+    vehicleController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     appStore = context.watch<AppStore>();
 

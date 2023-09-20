@@ -3,6 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moniepoint_task/main.dart';
 import 'package:moniepoint_task/presentation/screens/search/search_page.dart';
+import 'package:moniepoint_task/routes/route_list.dart';
+import 'package:moniepoint_task/services/navigation_service.dart';
 
 class AnimatedAppBar extends StatelessWidget {
   final bool isNormal;
@@ -141,11 +143,7 @@ class AnimatedAppBar extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context, rootNavigator: true).push(
-                      MaterialPageRoute(
-                        builder: (context) => const SearchPage(),
-                      ),
-                    );
+                    locator<NavigationService>().navigateTo(RouteList.search);
                   },
                   child: Hero(
                     tag: 'Search-Container',

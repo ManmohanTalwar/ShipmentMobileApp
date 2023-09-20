@@ -16,9 +16,10 @@ class ShipmentHistory extends StatefulWidget {
 }
 
 class _ShipmentHistoryState extends State<ShipmentHistory>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AppStore appStore;
   late TabController controller;
+  late AnimationController appBarController;
   final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 
   static Tween<Offset> offset =
@@ -26,8 +27,21 @@ class _ShipmentHistoryState extends State<ShipmentHistory>
 
   @override
   void initState() {
-    controller = TabController(length: 5, vsync: this);
+    controller = TabController(
+      length: 5,
+      vsync: this,
+    );
+    appBarController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 350),
+    );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    appBarController.dispose();
+    super.dispose();
   }
 
   @override
@@ -35,127 +49,136 @@ class _ShipmentHistoryState extends State<ShipmentHistory>
     appStore = context.watch<AppStore>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Column(
-        children: [
-          AnimatedAppBar(
-            title: 'Shipment History',
-            isNormal: true,
-            onBackPressed: () {
-              appStore.changeTab(index: 0);
-            },
-            bottom: Observer(builder: (context) {
-              return TabBar(
-                indicatorColor: context.accentColor(),
-                indicatorSize: TabBarIndicatorSize.label,
-                tabAlignment: TabAlignment.center,
+      body: Observer(builder: (context) {
+        if (appStore.currentIndex == 2 && !controller.indexIsChanging) {
+          appBarController
+            ..reset()
+            ..forward(from: 0);
+        }
+        return Column(
+          children: [
+            AnimatedAppBar(
+              title: 'Shipment History',
+              isNormal: true,
+              onBackPressed: () {
+                appStore.changeTab(index: 0);
+              },
+              controller: appBarController,
+              bottom: Observer(builder: (context) {
+                return TabBar(
+                  indicatorColor: context.accentColor(),
+                  indicatorSize: TabBarIndicatorSize.label,
+                  tabAlignment: TabAlignment.center,
+                  controller: controller,
+                  indicatorWeight: 2,
+                  dividerColor: Colors.transparent,
+                  onTap: (index) async {
+                    setState(() {});
+                  },
+                  isScrollable: true,
+                  enableFeedback: true,
+                  labelColor: context.white(),
+                  unselectedLabelColor: context.white().withOpacity(0.6),
+                  tabs: [
+                    Tab(
+                      child: TabChild(
+                        count: appStore.allOrders.length,
+                        label: ' All ',
+                        isSelected: controller.index == 0,
+                      ),
+                    ),
+                    Tab(
+                      child: TabChild(
+                        count: appStore.inProgress.length,
+                        label: 'In Progress',
+                        isSelected: controller.index == 1,
+                      ),
+                    ),
+                    Tab(
+                      child: TabChild(
+                        count: appStore.pending.length,
+                        label: 'Pending Order',
+                        isSelected: controller.index == 2,
+                      ),
+                    ),
+                    Tab(
+                      child: TabChild(
+                        count: appStore.cancelled.length,
+                        label: 'Cancelled',
+                        isSelected: controller.index == 3,
+                      ),
+                    ),
+                    Tab(
+                      child: TabChild(
+                        count: appStore.completed.length,
+                        label: 'Completed',
+                        isSelected: controller.index == 4,
+                      ),
+                    ),
+                  ],
+                );
+              }),
+            ),
+            UIHelper.verticalSpace(10.0),
+            Expanded(
+              child: TabBarView(
                 controller: controller,
-                indicatorWeight: 2,
-                dividerColor: Colors.transparent,
-                onTap: (index) async {
-                  setState(() {});
-                },
-                isScrollable: true,
-                enableFeedback: true,
-                labelColor: context.white(),
-                unselectedLabelColor: context.white().withOpacity(0.6),
-                tabs: [
-                  Tab(
-                    child: TabChild(
-                      count: appStore.allOrders.length,
-                      label: ' All ',
-                      isSelected: controller.index == 0,
-                    ),
-                  ),
-                  Tab(
-                    child: TabChild(
-                      count: appStore.inProgress.length,
-                      label: 'In Progress',
-                      isSelected: controller.index == 1,
-                    ),
-                  ),
-                  Tab(
-                    child: TabChild(
-                      count: appStore.pending.length,
-                      label: 'Pending Order',
-                      isSelected: controller.index == 2,
-                    ),
-                  ),
-                  Tab(
-                    child: TabChild(
-                      count: appStore.cancelled.length,
-                      label: 'Cancelled',
-                      isSelected: controller.index == 3,
-                    ),
-                  ),
-                  Tab(
-                    child: TabChild(
-                      count: appStore.completed.length,
-                      label: 'Completed',
-                      isSelected: controller.index == 4,
-                    ),
-                  ),
-                ],
-              );
-            }),
-          ),
-          UIHelper.verticalSpace(10.0),
-          Expanded(
-            child: TabBarView(
-              controller: controller,
-              children: [
-                Observer(builder: (context) {
-                  return AnimatedList(
-                    initialItemCount: appStore.allOrders.length,
+                children: [
+                  Observer(builder: (context) {
+                    return AnimatedList(
+                      initialItemCount: appStore.allOrders.length,
+                      itemBuilder: (context, index, animation) =>
+                          SlideTransition(
+                        position: animation.drive(offset),
+                        child: ShipmentCard(
+                          data: appStore.allOrders[index],
+                        ),
+                      ),
+                    );
+                  }),
+                  AnimatedList(
+                    initialItemCount: appStore.inProgress.length,
                     itemBuilder: (context, index, animation) => SlideTransition(
                       position: animation.drive(offset),
                       child: ShipmentCard(
-                        data: appStore.allOrders[index],
+                        data: appStore.inProgress[index],
                       ),
                     ),
-                  );
-                }),
-                AnimatedList(
-                  initialItemCount: appStore.inProgress.length,
-                  itemBuilder: (context, index, animation) => SlideTransition(
-                    position: animation.drive(offset),
-                    child: ShipmentCard(
-                      data: appStore.inProgress[index],
+                  ),
+                  AnimatedList(
+                    initialItemCount: appStore.pending.length,
+                    itemBuilder: (context, index, animation) => SlideTransition(
+                      position: animation.drive(offset),
+                      child: ShipmentCard(
+                        data: appStore.pending[index],
+                      ),
                     ),
                   ),
-                ),
-                AnimatedList(
-                  initialItemCount: appStore.pending.length,
-                  itemBuilder: (context, index, animation) => SlideTransition(
-                    position: animation.drive(offset),
-                    child: ShipmentCard(
-                      data: appStore.pending[index],
+                  AnimatedList(
+                    initialItemCount: appStore.cancelled.length,
+                    itemBuilder: (context, index, animation) => SlideTransition(
+                      position: animation.drive(offset),
+                      child: ShipmentCard(
+                        data: appStore.cancelled[index],
+                      ),
                     ),
                   ),
-                ),
-                AnimatedList(
-                  initialItemCount: appStore.cancelled.length,
-                  itemBuilder: (context, index, animation) => SlideTransition(
-                    position: animation.drive(offset),
-                    child: ShipmentCard(
-                      data: appStore.cancelled[index],
+                  AnimatedList(
+                    initialItemCount: appStore.completed.length,
+                    itemBuilder: (context, index, animation) => SlideTransition(
+                      position: animation.drive(offset),
+                      child: ShipmentCard(
+                        data: appStore.completed[index],
+                      ),
                     ),
                   ),
-                ),
-                AnimatedList(
-                  initialItemCount: appStore.completed.length,
-                  itemBuilder: (context, index, animation) => SlideTransition(
-                    position: animation.drive(offset),
-                    child: ShipmentCard(
-                      data: appStore.completed[index],
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          UIHelper.verticalSpace(30.0),
-        ],
-      ),
+            UIHelper.verticalSpace(30.0),
+          ],
+        );
+      }),
     );
   }
 }
