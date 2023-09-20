@@ -1,5 +1,6 @@
 import 'package:countup/countup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moniepoint_task/main.dart';
 import 'package:moniepoint_task/presentation/widgets/custom_button.dart';
@@ -110,7 +111,12 @@ class _EstimateScreenState extends State<EstimateScreen> {
               height: 60.0,
             ),
           ],
-        ),
+        )
+            .animate()
+            .fadeIn(duration: 350.ms)
+            .then()
+            .slideY(begin: 0.5, end: 0, duration: 250.ms)
+            .fadeIn(duration: 350.ms),
       ),
     );
   }
